@@ -6,9 +6,13 @@ add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 include(cmake/GTest.cmake)
 
-add_executable(sample_test src/testZero.cpp)
+add_executable(sample_test src/testZero.cpp src/sampleTests.cpp)
 target_include_directories(sample_test PUBLIC include)
-target_link_libraries(sample_test gtest_main gtest)
+target_link_libraries(sample_test gmock_main gtest gmock)
+
+add_custom_target(run_tests
+                  COMMAND sample_test
+                  DEPENDS sample_test)
 
 enable_testing()
 add_test(tests sample_test)
