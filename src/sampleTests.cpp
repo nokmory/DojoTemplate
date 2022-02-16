@@ -4,10 +4,14 @@
 
 constexpr double PI{std::acos(-1)};
 
+// basic test
+
 TEST(environmentTest, passingTest)
 {
     EXPECT_EQ(true, true);
 }
+
+// test with fixture
 
 struct Fixture : public testing::Test
 {
@@ -19,6 +23,8 @@ TEST_F(Fixture, testUsingFixture)
 {
     EXPECT_EQ(sth, 7);
 }
+
+// test with mock
 
 using ReturnType = int;
 using ArgType1 = char;
@@ -44,6 +50,8 @@ TEST(environmentTest, mockPassingTest)
     niceMock.methodName('a', 0.4);
 }
 
+// parametric test
+
 struct Params
 {
     int val;
@@ -65,6 +73,8 @@ TEST_P(ParametricTests, aTest)
 }
 
 INSTANTIATE_TEST_CASE_P(ParametricInstatiation, ParametricTests, ::testing::Values(Params{2}, Params{4}));
+
+// matcher instead of equality
 
 struct CoordCart
 {
