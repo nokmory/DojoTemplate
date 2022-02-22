@@ -17,12 +17,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 # On debian-like:
-# sudo apt-get install libx11-dev libxrandr-dev freeglut3-dev libudev-dev libfreetype-dev libopenal-dev libvorbis-dev
+# sudo apt-get install libx11-dev libxrandr-dev freeglut3-dev libudev-dev libfreetype-dev libopenal-dev libvorbis-dev libxcursor-dev
 #
 FetchContent_Declare(
     sfml
     GIT_REPOSITORY "https://github.com/SFML/SFML.git"
-    GIT_TAG        "master"
+    GIT_TAG        "fab2c93d7a56e85f60e26f065c051630ffff420e"
 )
 
 FetchContent_GetProperties(sfml)
@@ -42,7 +42,7 @@ target_link_libraries(sample_test PRIVATE gmock_main gtest gmock)
 
 
 add_executable(sfml_sample src/sfmlSample.cpp)
-target_link_libraries(sfml_sample PRIVATE sfml-graphics sfml-window sfml-system)
+target_link_libraries(sfml_sample PRIVATE sfml-graphics)
 
 
 add_custom_target(run_tests
