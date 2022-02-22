@@ -12,6 +12,9 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
+if(MSVC)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
 
 # On debian-like:
 # sudo apt-get install libx11-dev libxrandr-dev freeglut3-dev libudev-dev libfreetype-dev libopenal-dev libvorbis-dev
