@@ -12,10 +12,6 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-if(MSVC)
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-endif()
-
 # On debian-like:
 # sudo apt-get install libx11-dev libxrandr-dev freeglut3-dev libudev-dev libfreetype-dev libopenal-dev libvorbis-dev
 #
@@ -31,7 +27,11 @@ if(NOT sfml_POPULATED)
     add_subdirectory(${sfml_SOURCE_DIR} ${sfml_BINARY_DIR})
 endif()
 
-add_compile_options(-Wall -Wextra -pedantic -Werror)
+if(MSVC)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+else()
+    add_compile_options(-Wall -Wextra -pedantic -Werror)
+endif()
 
 add_executable(sample_test src/testZero.cpp src/sampleTests.cpp)
 target_include_directories(sample_test PUBLIC include)
