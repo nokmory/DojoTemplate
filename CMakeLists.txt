@@ -3,6 +3,10 @@ project(ChangeMyName CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
+if(MSVC)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
+
 include(FetchContent)
 FetchContent_Declare(
         googletest
@@ -18,7 +22,7 @@ FetchContent_MakeAvailable(googletest)
 FetchContent_Declare(
     sfml
     GIT_REPOSITORY "https://github.com/SFML/SFML.git"
-    GIT_TAG        "2.5.1"
+    GIT_TAG        "master"
 )
 
 FetchContent_GetProperties(sfml)
@@ -27,20 +31,18 @@ if(NOT sfml_POPULATED)
     add_subdirectory(${sfml_SOURCE_DIR} ${sfml_BINARY_DIR})
 endif()
 
-if(MSVC)
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-else()
+if(NOT MSVC)
     add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
 add_executable(sample_test src/testZero.cpp src/sampleTests.cpp)
 target_include_directories(sample_test PUBLIC include)
-target_link_libraries(sample_test gmock_main gtest gmock)
+target_link_libraries(sample_test PRIVATE gmock_main gtest gmock)
 
 
 
 add_executable(sfml_sample src/sfmlSample.cpp)
-target_link_libraries(sfml_sample sfml-graphics)
+target_link_libraries(sfml_sample PRIVATE sfml-graphics sfml-window sfml-system)
 
 
 add_custom_target(run_tests
