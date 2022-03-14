@@ -2,7 +2,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-constexpr double PI{std::acos(-1)};
+const double PI{std::acos(-1)};
 
 // basic test
 
@@ -72,7 +72,7 @@ TEST_P(ParametricTests, aTest)
     EXPECT_EQ(params.val % 2, 0);
 }
 
-INSTANTIATE_TEST_CASE_P(ParametricInstatiation, ParametricTests, ::testing::Values(Params{2}, Params{4}));
+INSTANTIATE_TEST_SUITE_P(ParametricInstatiation, ParametricTests, ::testing::Values(Params{2}, Params{4}));
 
 // matcher instead of equality
 
