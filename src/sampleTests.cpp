@@ -74,6 +74,21 @@ TEST_P(ParametricTests, aTest)
 
 INSTANTIATE_TEST_SUITE_P(ParametricInstatiation, ParametricTests, ::testing::Values(Params{2}, Params{4}));
 
+// testing exceptions
+class ExampleException : public std::exception
+{
+};
+
+void exceptionalFunc()
+{
+    throw ExampleException();
+}
+
+TEST(ThrowingExceptions, exceptionThrownWhenFunctionExceptionalFuncCalled)
+{
+    EXPECT_THROW(exceptionalFunc(), ExampleException);
+}
+
 // matcher instead of equality
 
 struct CoordCart
