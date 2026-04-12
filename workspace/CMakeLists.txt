@@ -15,12 +15,12 @@ FetchContent_MakeAvailable(googletest)
 add_executable(sample_test src/testZero.cpp src/sampleTests.cpp)
 target_include_directories(sample_test PUBLIC include)
 target_link_libraries(sample_test gmock_main gtest gmock)
-target_compile_features(sample_test PUBLIC cxx_std_20)
-
+target_compile_features(sample_test PUBLIC cxx_std_23)
 
 add_custom_target(run_tests
                   COMMAND sample_test
-                  DEPENDS sample_test)
+                  DEPENDS sample_test
+                  USES_TERMINAL)
 
 enable_testing()
 add_test(tests sample_test)
