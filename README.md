@@ -17,11 +17,11 @@ If you have everything installed already and don't really care about versions of
 It will generate Makefile by default, use -G"Ninja" to get ninja scripts instead.
 
 ### Docker/Podman
-If you want a different (for example: never) compiler or don't want to install additional software on your system beyond podman or docker
+If you want a different (for example: never) compiler or don't want to install additional software on your system beyond Podman or Docker
 
 1. Get inside repo
 > cd MyAwesomeProject
-2. Get the gcc image with cnake and ninja ready:
+2. Get the gcc image with cmake and ninja ready:
 > podman build . -t=gcc_latest
 3. Start interactive shell in the container and mount the workspace. Build folder will live and die with the container
 > podman run --mount type=bind,source=`pwd`/workspace,destination=/workspace -p 2222:2222 --rm -it gcc_latest
