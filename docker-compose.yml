@@ -1,9 +1,0 @@
-services:
-  cpp:
-    image: gcc_latest
-    volumes:
-      - type: bind
-        source: ${PWD}/workspace
-        target: /workspace
-    ports:
-      - "2222:22"
